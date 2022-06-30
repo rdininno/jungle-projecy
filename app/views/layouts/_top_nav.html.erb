@@ -43,6 +43,7 @@
         </li> %>
       </ul>
       <ul class="navbar-nav">
+      <li><%= link_to 'About', [:about_index], class: "nav-link" %></li>
         <li class="nav-item dropdown">
           <a
             class="nav-link dropdown-toggle text-danger"
@@ -55,6 +56,7 @@
             Admin
           </a>
           <ul class="dropdown-menu dropdown-menu-dark">
+            
             <li><%= link_to 'Dashboard', [:admin, :root], class: "nav-link" %></li>
             <li><%= link_to 'Products', [:admin, :products], class: "nav-link" %></li>
           </ul>
