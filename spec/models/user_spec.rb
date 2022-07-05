@@ -112,4 +112,32 @@ RSpec.describe User, type: :model do
       expect(@user.errors).to include(:password)
     end
   end
+
+  describe '.authenticate_with_credentials' do
+    it "Should log a user in if credentials are correct" do 
+      @user = User.new(
+        first_name: "robert",
+        last_name: "robert",
+        email: "robert@robert.com",
+        password: "ABCDEF",
+        password_confirmation: "ABCDEF"
+      )
+
+      @user.save
+      expect(User.authenticate_with_credentials("robert@robert.com", "ABCDEF")).to be_present
+    end
+
+    it "returns nil if user cannot be authenticated" do 
+      @user = User.new(
+        first_name: "robert",
+        last_name: "robert",
+        email: "robert@robert.com",
+        password: "ABCDEF",
+        password_confirmation: "ABCDEF"
+      )
+
+      @user.save
+      expect(User.authenticate_with_credentials("robert@robert.com", "BCDEF")).to be_nil
+    end
+  end
 end
