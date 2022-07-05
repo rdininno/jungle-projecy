@@ -139,5 +139,18 @@ RSpec.describe User, type: :model do
       @user.save
       expect(User.authenticate_with_credentials("robert@robert.com", "BCDEF")).to be_nil
     end
+
+    it "returns nil if user cannot be authenticated" do 
+      @user = User.new(
+        first_name: "robert",
+        last_name: "robert",
+        email: "robert@robert.com",
+        password: "ABCDEF",
+        password_confirmation: "ABCDEF"
+      )
+
+      @user.save
+      expect(User.authenticate_with_credentials(" ROBERT@robert.com", "ABCDEF")).to be_present.and have_attributes(:email => "robert@robert.com")
+    end
   end
 end
